@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://d2uxfhv85l7hi"]
+
+[ext_resource type="Script" uid="uid://xqdaikyytfus" path="res://scripts/player.gd" id="1_4dohe"]
+[ext_resource type="Texture2D" uid="uid://25rsnplvtra4" path="res://images/player.svg" id="2_r66lb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fsdpt"]
+radius = 25.6
+
+[node name="Player" type="CharacterBody2D" unique_id=1027212936]
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+script = ExtResource("1_4dohe")
+
+[node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=785498532]
+shape = SubResource("CircleShape2D_fsdpt")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1415635471]
+visible = false
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_r66lb")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=249903107]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.6
+offset_top = -25.6
+offset_right = 25.6
+offset_bottom = 25.6
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+max_value = 6.0
+value = 6.0
+rounded = true
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("2_r66lb")
+texture_progress = ExtResource("2_r66lb")
+tint_under = Color(0.3167847, 0.31678474, 0.3167847, 1)

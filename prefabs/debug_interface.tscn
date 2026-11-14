@@ -1,0 +1,160 @@
+[gd_scene format=3 uid="uid://8by06s3t8ews"]
+
+[ext_resource type="Script" uid="uid://dtjgfffa16qxd" path="res://scripts/debug_interface.gd" id="1_kgw66"]
+[ext_resource type="Theme" uid="uid://sgjkcfglxhyb" path="res://themes/debug.tres" id="1_mi3bn"]
+[ext_resource type="Script" uid="uid://pj6n86kieqw8" path="res://scripts/connect_values.gd" id="3_woilj"]
+[ext_resource type="Script" uid="uid://c5j3vdx6dnav3" path="res://scripts/slider_value_connection.gd" id="4_182kp"]
+
+[node name="DebugInterface" type="Control" unique_id=1460206871]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kgw66")
+
+[node name="Resize" type="VSplitContainer" parent="." unique_id=470080242]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugPanel" type="FoldableContainer" parent="Resize" unique_id=656248860]
+layout_mode = 2
+size_flags_vertical = 3
+title = "Debug Panel"
+title_alignment = 1
+
+[node name="Margin" type="MarginContainer" parent="Resize/DebugPanel" unique_id=1775193929]
+layout_mode = 2
+theme = ExtResource("1_mi3bn")
+
+[node name="Tabs" type="TabContainer" parent="Resize/DebugPanel/Margin" unique_id=772322640]
+layout_mode = 2
+current_tab = 0
+tab_0/title = "Player"
+tab_1/title = "Enemies"
+tab_1/disabled = true
+tab_2/title = "Upgrades"
+tab_2/disabled = true
+
+[node name="PlayerInfo" type="Control" parent="Resize/DebugPanel/Margin/Tabs" unique_id=1870466798]
+layout_mode = 2
+metadata/_tab_index = 0
+metadata/_tab_name = "Player"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo" unique_id=1148627491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer" unique_id=1801489532]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="LeftResize" type="Control" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=1144155328]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightResize" type="Control" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=949264938]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HealthLabel" type="Label" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=976666059]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Health"
+horizontal_alignment = 2
+
+[node name="HealthValue" type="HBoxContainer" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=332889354 node_paths=PackedStringArray("connections")]
+layout_mode = 2
+script = ExtResource("3_woilj")
+connections = [NodePath("HealthSpin"), NodePath("HealthSlider")]
+
+[node name="HealthSpin" type="SpinBox" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/HealthValue" unique_id=1411557586]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+offset_transform_pivot_ratio = Vector2(0, 0.5)
+max_value = 6.0
+value = 6.0
+rounded = true
+
+[node name="HealthSlider" type="HSlider" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/HealthValue" unique_id=1220340182 node_paths=PackedStringArray("limiter", "spin_counterpart")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+offset_transform_enabled = true
+offset_transform_pivot_ratio = Vector2(0, 0.5)
+max_value = 6.0
+value = 6.0
+rounded = true
+tick_count = 7
+ticks_position = 3
+script = ExtResource("4_182kp")
+limiter = NodePath("../../MaxHealthSpin")
+spin_counterpart = NodePath("../HealthSpin")
+
+[node name="GapA" type="Control" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/HealthValue" unique_id=1021691146]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GapB" type="Control" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/HealthValue" unique_id=1269955831]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MaxHealthLabel" type="Label" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=1636318387]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Max Health"
+horizontal_alignment = 2
+
+[node name="MaxHealthSpin" type="SpinBox" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=1590440617]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 1.0
+max_value = 6.0
+value = 6.0
+rounded = true
+allow_greater = true
+
+[node name="SpeedLabel" type="Label" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=1258932404]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Speed"
+horizontal_alignment = 2
+
+[node name="SpeedSpin" type="SpinBox" parent="Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer" unique_id=2049565259]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = -250.0
+max_value = 250.0
+step = 25.0
+value = 100.0
+rounded = true
+allow_greater = true
+allow_lesser = true
+
+[node name="EnemyInfo" type="Control" parent="Resize/DebugPanel/Margin/Tabs" unique_id=197282760]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+metadata/_tab_name = "Enemies"
+
+[node name="UpgradeInfo" type="Control" parent="Resize/DebugPanel/Margin/Tabs" unique_id=219513609]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+metadata/_tab_name = "Upgrades"
+
+[node name="Nothing" type="Control" parent="Resize" unique_id=1721963007]
+layout_mode = 2
+size_flags_vertical = 3
