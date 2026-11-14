@@ -13,10 +13,17 @@ signal health_changed(new_health: float)
 ## Emits when [member max_health] is changed. Sends the new health as [param new_max].
 signal max_health_changed(new_max: float)
 
+## Emits when [member speed] is changed. Sends the new speed as [param new_speed].
+signal speed_changed(new_speed: float)
+
 
 
 ## The speed of the player in [i]milliunits[/i].
-@export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var speed: float = 100.0
+@export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var speed: float = 100.0:
+	get: return speed
+	set(new_speed):
+		speed = new_speed
+		speed_changed.emit(new_speed)
 
 ## The maximum health the player may have in [i]hp[/i].
 @export_range(1, 6, 1, "or_greater", "suffix:hp") var max_health: int = 6:

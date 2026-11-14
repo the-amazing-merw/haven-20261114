@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d2uxfhv85l7hi" path="res://prefabs/player.tscn" id="1_etyyu"]
 [ext_resource type="Texture2D" uid="uid://boklnpomgujf7" path="res://images/brick.png" id="2_fxo6y"]
 [ext_resource type="Script" uid="uid://c7xr7e866gg4t" path="res://scripts/camera_track.gd" id="3_fxo6y"]
+[ext_resource type="Script" uid="uid://d2ao3sr7luepp" path="res://scripts/show_on_load.gd" id="4_0bg5e"]
 [ext_resource type="PackedScene" uid="uid://8by06s3t8ews" path="res://prefabs/debug_interface.tscn" id="4_2vmhc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_etyyu"]
@@ -311,11 +312,10 @@ script = ExtResource("3_fxo6y")
 subject = NodePath("../Player")
 
 [node name="Interface" type="CanvasLayer" parent="." unique_id=1510291445]
-follow_viewport_enabled = true
+visible = false
+script = ExtResource("4_0bg5e")
 
 [node name="DebugInterface" parent="Interface" unique_id=1460206871 node_paths=PackedStringArray("player") instance=ExtResource("4_2vmhc")]
-offset_left = -576.0
-offset_top = -324.0
-offset_right = -576.0
-offset_bottom = -324.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 player = NodePath("../../Player")
