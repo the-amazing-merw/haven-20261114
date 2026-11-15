@@ -96,6 +96,7 @@ func _ready() -> void:
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 	speed_changed.connect(func (new_speed): navigation_agent.max_speed = new_speed)
 	hurt_area.body_entered.connect(_damage_player)
+	player.died.connect(_on_player_death)
 
 func _process(delta: float) -> void:
 	if is_wandering:
@@ -107,7 +108,7 @@ func _process(delta: float) -> void:
 		is_wandering = false
 	
 	ray.target_position = player.position - position
-	if ray.is_colliding() and magnitude(ray.target_position) <= enemy_detection_radius:
+	if ray.is_colliding() or magnitude(ray.target_position) > enemy_detection_radius:
 		if randf() <= wandering_chance / 100 and !is_wandering:
 			wander_target = position + Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * wandering_radius
 			is_wandering = true
@@ -143,3 +144,8 @@ func _damage_player(_other_body) -> void:
 	player.health -= enemy_damage
 	player.velocity += linear_velocity * enemy_knockback_mult
 	player.move_and_slide()
+
+func _on_player_death() -> void:
+	var tween = create_tween()
+	tween.bind_node(self)
+	tween.tween_property(self, "enemy_speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)

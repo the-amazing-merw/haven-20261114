@@ -19,26 +19,24 @@ func _on_visible() -> void:
 	title.add_theme_color_override("font_color", Color(1, 0, 0 ,0))
 	
 	
-	var tween := get_tree().create_tween()
+	var tween := create_tween()
+	tween.bind_node(center)
 	tween.tween_property(center, "size_flags_stretch_ratio", 1.0, 2).set_trans(Tween.TRANS_SINE)
-	tween.tween_callback(center.queue_free)
+	#tween.tween_callback(center.queue_free)
 	
 	sound.play()
 	
 	timer.start(2)
 	timer.timeout.connect(func ():
-		#tween.stop()
-		#tween.tween_property(self, "theme_override_colors/font_color", Color(1, 0, 0, 1), 2)
-		#title.remove_theme_color_override("font_size")
+		timer.stop()
+		tween.stop()
+		
 		title.add_theme_font_size_override("font_size", 128)
 		
-		@warning_ignore("confusable_capture_reassignment")
-		tween = get_tree().create_tween()
-		tween.tween_method(_tween, Color(1, 0, 0 ,0), Color.RED, 2).set_trans(Tween.TRANS_SINE)
-		tween.tween_callback(title.queue_free)
-		
-		#timer.start(2)
-		#timer.timeout.connect(tween.stop)
+		tween = create_tween()
+		tween.tween_property(title, "theme_override_colors/font_color", Color.RED, 2).set_trans(Tween.TRANS_SINE)
+		#tween.tween_method(_tween, Color(1, 0, 0 ,0), Color.RED, 2).set_trans(Tween.TRANS_SINE)
+		#tween.tween_callback(title.queue_free)
 	)
 
 func _tween(color: Color) -> void:

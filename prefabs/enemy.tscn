@@ -10,6 +10,7 @@ radius = 30.0
 radius = 25.6
 
 [node name="Enemy" type="RigidBody2D" unique_id=1432049881]
+mass = 0.25
 gravity_scale = 0.0
 script = ExtResource("1_yfjof")
 metadata/_custom_type_script = "uid://bddoavtlg8mv0"

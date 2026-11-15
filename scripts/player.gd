@@ -73,3 +73,7 @@ func _physics_process(_delta: float) -> void:
 
 func _on_death() -> void:
 	print("We died.")
+	
+	var tween = create_tween()
+	tween.bind_node(self)
+	tween.tween_property(self, "speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
