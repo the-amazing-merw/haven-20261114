@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dy85h18x3cqpj"]
+
+[ext_resource type="AudioStream" uid="uid://cr5468eo7q717" path="res://sounds/death.mp3" id="1_70ets"]
+[ext_resource type="Script" uid="uid://qqwh4qbb6jux" path="res://prefabs/death.gd" id="1_mx2f8"]
+
+[sub_resource type="Gradient" id="Gradient_mx2f8"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.2, 0.8, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.6784314, 0, 0, 0, 0.6784314, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wyboc"]
+gradient = SubResource("Gradient_mx2f8")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h2tm8"]
+texture = SubResource("GradientTexture2D_wyboc")
+
+[sub_resource type="Theme" id="Theme_fsdpt"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_h2tm8")
+
+[sub_resource type="SystemFont" id="SystemFont_i46ye"]
+font_names = PackedStringArray("Times New Roman")
+
+[node name="Death" type="Control" unique_id=1213513323]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mx2f8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=729437512]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Top" type="Control" parent="VBoxContainer" unique_id=1304825017]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Center" type="PanelContainer" parent="VBoxContainer" unique_id=224658445]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+theme = SubResource("Theme_fsdpt")
+
+[node name="Title" type="Label" parent="VBoxContainer/Center" unique_id=234061376]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = SubResource("SystemFont_i46ye")
+theme_override_font_sizes/font_size = 16
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Bottom" type="Control" parent="VBoxContainer" unique_id=75538867]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Sound" type="AudioStreamPlayer" parent="." unique_id=1159180460]
+stream = ExtResource("1_70ets")
+volume_db = 8.0
+
+[node name="Timer" type="Timer" parent="." unique_id=354245646]

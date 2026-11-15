@@ -22,6 +22,9 @@ signal died
 
 
 
+## The UI to show when the player dies.
+@export var death_ui: Control
+
 ## The speed of the player in [i]milliunits[/i].
 @export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var speed: float = 100.0: set = _set_speed
 
@@ -50,6 +53,7 @@ func _set_health(new_value):
 	
 	if new_value <= 0:
 		died.emit()
+		if death_ui: death_ui.visible = true
 
 
 

@@ -2,11 +2,15 @@
 extends Control
 
 
+
 @export var player: Player2D
+
+
 
 @onready var health_spin := $Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/HealthValue/HealthSpin
 @onready var max_health_spin := $Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/MaxHealthSpin
 @onready var speed_spin := $Resize/DebugPanel/Margin/Tabs/PlayerInfo/ScrollContainer/GridContainer/SpeedSpin
+
 
 
 func handle_player_change(spin: SpinBox):
@@ -21,8 +25,20 @@ func handle_spin_change(property: StringName):
 	
 	return curry
 
+func handle_folding(is_folded: bool) -> void:
+	if is_folded:
+		$Resize.dragger_visibility = SplitContainer.DraggerVisibility.DRAGGER_HIDDEN_COLLAPSED
+	else:
+		$Resize.dragger_visibility = SplitContainer.DraggerVisibility.DRAGGER_VISIBLE
+	
+	$Resize.dragging_enabled = !is_folded
+
 func _ready() -> void:
 	if player:
+		max_health_spin.value = player.max_health
+		health_spin.value = player.health
+		speed_spin.value = player.speed
+		
 		player.health_changed.connect(handle_player_change(health_spin))
 		player.max_health_changed.connect(handle_player_change(max_health_spin))
 		player.speed_changed.connect(handle_player_change(speed_spin))
@@ -31,7 +47,4 @@ func _ready() -> void:
 		max_health_spin.value_changed.connect(handle_spin_change("max_health"))
 		speed_spin.value_changed.connect(handle_spin_change("speed"))
 	
-	$Resize/DebugPanel.folding_changed.connect(func (is_folded):
-		$Resize.dragger_visibility = SplitContainer.DraggerVisibility.DRAGGER_HIDDEN_COLLAPSED if is_folded else SplitContainer.DraggerVisibility.DRAGGER_VISIBLE
-		$Resize.dragging_enabled = !is_folded
-	)
+	$Resize/DebugPanel.folding_changed.connect(handle_folding)
