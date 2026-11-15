@@ -76,8 +76,6 @@ polygon = PackedVector2Array(256, -256, 2048, -256, 2048, -768, 2560, -768, 2560
 [node name="Player" parent="." unique_id=838036766 node_paths=PackedStringArray("death_ui") instance=ExtResource("1_etyyu")]
 position = Vector2(550, 320)
 death_ui = NodePath("../Interface/Death")
-max_health = 20
-health = 20
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1865513572 node_paths=PackedStringArray("subject")]
 position_smoothing_enabled = true
