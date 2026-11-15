@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dg562npb5srh5"]
+
+[ext_resource type="Script" uid="uid://bddoavtlg8mv0" path="res://scripts/enemy.gd" id="1_yfjof"]
+[ext_resource type="Texture2D" uid="uid://25rsnplvtra4" path="res://images/player.svg" id="2_cypye"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h2tm8"]
+radius = 30.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7d0n"]
+radius = 25.6
+
+[node name="Enemy" type="RigidBody2D" unique_id=1432049881]
+gravity_scale = 0.0
+script = ExtResource("1_yfjof")
+metadata/_custom_type_script = "uid://bddoavtlg8mv0"
+
+[node name="Ray" type="RayCast2D" parent="." unique_id=419513073]
+target_position = Vector2(0, 36)
+
+[node name="HurtArea" type="Area2D" parent="." unique_id=2043040152]
+collision_layer = 16
+collision_mask = 4
+priority = 1
+
+[node name="Shape" type="CollisionShape2D" parent="HurtArea" unique_id=1529218959]
+shape = SubResource("CircleShape2D_h2tm8")
+
+[node name="EnemyCollider" type="CollisionShape2D" parent="." unique_id=990609900]
+shape = SubResource("CircleShape2D_a7d0n")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=2136060999]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.6
+offset_top = -25.6
+offset_right = 25.6
+offset_bottom = 25.6
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+max_value = 6.0
+value = 6.0
+rounded = true
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("2_cypye")
+texture_progress = ExtResource("2_cypye")
+tint_under = Color(2.3750618, 0, 0, 1)
+tint_progress = Color(7.087404, 0, 0, 1)
+
+[node name="Agent" type="NavigationAgent2D" parent="." unique_id=997074410]
+avoidance_enabled = true
+radius = 30.0

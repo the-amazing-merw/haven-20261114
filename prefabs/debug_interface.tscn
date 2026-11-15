@@ -21,14 +21,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+dragging_enabled = false
+dragger_visibility = 2
 
 [node name="DebugPanel" type="FoldableContainer" parent="Resize" unique_id=656248860]
 layout_mode = 2
 size_flags_vertical = 3
+folded = true
 title = "Debug Panel"
 title_alignment = 1
 
 [node name="Margin" type="MarginContainer" parent="Resize/DebugPanel" unique_id=1775193929]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_mi3bn")
 

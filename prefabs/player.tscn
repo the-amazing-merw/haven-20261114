@@ -15,11 +15,6 @@ script = ExtResource("1_4dohe")
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=785498532]
 shape = SubResource("CircleShape2D_fsdpt")
 
-[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=1415635471]
-visible = false
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_r66lb")
-
 [node name="TextureProgressBar" type="TextureProgressBar" parent="." unique_id=249903107]
 anchors_preset = 8
 anchor_left = 0.5
