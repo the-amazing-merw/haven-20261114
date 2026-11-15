@@ -85,6 +85,7 @@ func _set_health(new_value):
 @onready var navigation_agent := $Agent
 @onready var ray := $Ray
 @onready var hurt_area := $HurtArea
+@onready var self_harm_area := $SelfHarmArea
 
 var is_wandering: bool
 var wander_target: Vector2
@@ -96,7 +97,9 @@ func _ready() -> void:
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 	speed_changed.connect(func (new_speed): navigation_agent.max_speed = new_speed)
 	hurt_area.body_entered.connect(_damage_player)
+	self_harm_area.body_entered.connect(_damage_self)
 	player.died.connect(_on_player_death)
+	died.connect(_on_self_death)
 
 func _process(delta: float) -> void:
 	if is_wandering:
@@ -145,7 +148,13 @@ func _damage_player(_other_body) -> void:
 	player.velocity += linear_velocity * enemy_knockback_mult
 	player.move_and_slide()
 
+func _damage_self(_other_body) -> void:
+	enemy_health -= 1
+
 func _on_player_death() -> void:
 	var tween = create_tween()
 	tween.bind_node(self)
 	tween.tween_property(self, "enemy_speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
+
+func _on_self_death() -> void:
+	queue_free()

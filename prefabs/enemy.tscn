@@ -26,6 +26,14 @@ priority = 1
 [node name="Shape" type="CollisionShape2D" parent="HurtArea" unique_id=1529218959]
 shape = SubResource("CircleShape2D_h2tm8")
 
+[node name="SelfHarmArea" type="Area2D" parent="." unique_id=2072867301]
+collision_layer = 16
+collision_mask = 8
+priority = 1
+
+[node name="Shape" type="CollisionShape2D" parent="SelfHarmArea" unique_id=1456932959]
+shape = SubResource("CircleShape2D_h2tm8")
+
 [node name="EnemyCollider" type="CollisionShape2D" parent="." unique_id=990609900]
 shape = SubResource("CircleShape2D_a7d0n")
 

@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://j0jetxofe5a8"]
+
+[ext_resource type="Texture2D" uid="uid://cc1j7xr12dgjn" path="res://images/sawblade.png" id="1_0sye7"]
+[ext_resource type="Script" uid="uid://dy311iusbng1m" path="res://scripts/sawblade.gd" id="1_byu6j"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0sye7"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fsdpt"]
+radius = 25.6
+
+[node name="Node" type="RigidBody2D" unique_id=490964273]
+collision_layer = 8
+physics_material_override = SubResource("PhysicsMaterial_0sye7")
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_byu6j")
+
+[node name="Sawblade" type="Sprite2D" parent="." unique_id=54151398]
+scale = Vector2(0.21, 0.21)
+texture = ExtResource("1_0sye7")
+
+[node name="WeaponCollider" type="CollisionShape2D" parent="." unique_id=1714535188]
+shape = SubResource("CircleShape2D_fsdpt")
+
+[node name="HurtArea" type="Area2D" parent="." unique_id=1036562137]
+
+[node name="Shape" type="CollisionShape2D" parent="HurtArea" unique_id=465813112]
+shape = SubResource("CircleShape2D_fsdpt")
