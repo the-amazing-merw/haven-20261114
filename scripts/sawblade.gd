@@ -1,19 +1,27 @@
-extends RigidBody2D
+class_name Sawblade2D extends Weapon2D
 
 
 
-var awake_time: float = 0.0
+@onready var player: Player2D
 
-#func _ready() -> void:
-	#body_entered.connect(_on_body_entered)
-#
-#func _on_body_entered(body: Node):
-	#if body.collision_layer
+var bounces: int = 0
 
-func _process(delta: float) -> void:
-	awake_time += delta
-	if awake_time >= 10.0:
-		queue_free()
+func damage(_target: Enemy2D) -> int:
+	return 1 + (bounces if player.upgrade_sawblade_bouncy_damage else 0)
+
+func _ready() -> void:
+	player = get_tree().current_scene.get_node(^"Player")
+	body_entered.connect(_on_body_entered)
+
+func _on_body_entered(body: Node):
+	if body.is_class("CollisionObject2D"):
+		var b: CollisionObject2D = body
+		
+		if b.collision_layer == 1:
+			bounces += 1
+			
+			if bounces > player.upgrade_sawblade_bounces:
+				queue_free()
 
 func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
 	angular_velocity = 50.0

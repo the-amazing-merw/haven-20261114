@@ -33,6 +33,7 @@ func _on_visible() -> void:
 		
 		title.add_theme_font_size_override("font_size", 128)
 		
+		@warning_ignore("confusable_capture_reassignment")
 		tween = create_tween()
 		tween.tween_property(title, "theme_override_colors/font_color", Color.RED, 2).set_trans(Tween.TRANS_SINE)
 		#tween.tween_method(_tween, Color(1, 0, 0 ,0), Color.RED, 2).set_trans(Tween.TRANS_SINE)

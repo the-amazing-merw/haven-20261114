@@ -36,6 +36,17 @@ signal died
 
 
 
+@export_group("Upgrades", "upgrade")
+@export_subgroup("Sawblade", "upgrade_sawblade")
+
+## The number of bounces that sawblades last for.
+@export_range(1, 10, 1, "or_greater", "prefer_slider") var upgrade_sawblade_bounces: int = 1
+
+## Whether each bounce adds extra damage to sawblades.
+@export var upgrade_sawblade_bouncy_damage: bool = false
+
+
+
 func _set_speed(new_speed):
 	speed = new_speed
 	speed_changed.emit(new_speed)

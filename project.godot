@@ -66,6 +66,10 @@ weapon_sawblade={
 2d_physics/layer_4="Weapons"
 2d_physics/layer_5="EnemyRaycast"
 
+[navigation]
+
+2d/default_edge_connection_margin=64.0
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

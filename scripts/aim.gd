@@ -6,8 +6,6 @@ var sawblade := preload("res://prefabs/weapons/sawblade.tscn")
 @onready var weapons_folder: Node = $"/root/DemoLevel/Weapons"
 
 func _input(event: InputEvent) -> void:
-	var mouse = get_global_mouse_position()
-	
 	if event.is_action_pressed("weapon_sawblade"):
 		var weapon: RigidBody2D = sawblade.instantiate()
 		weapons_folder.add_child(weapon)

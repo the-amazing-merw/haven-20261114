@@ -22,6 +22,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxTexture_h2tm8")
 
 [sub_resource type="SystemFont" id="SystemFont_i46ye"]
 font_names = PackedStringArray("Times New Roman")
+subpixel_positioning = 0
 
 [node name="Death" type="Control" unique_id=1213513323]
 layout_mode = 3

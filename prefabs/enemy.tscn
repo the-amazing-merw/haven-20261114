@@ -13,6 +13,15 @@ radius = 25.6
 mass = 0.25
 gravity_scale = 0.0
 script = ExtResource("1_yfjof")
+enemy_speed = null
+enemy_max_health = null
+enemy_health = null
+enemy_damage = null
+enemy_knockback_mult = null
+enemy_detection_radius = null
+wandering_chance = null
+wandering_radius = null
+wandering_timeout = null
 metadata/_custom_type_script = "uid://bddoavtlg8mv0"
 
 [node name="Ray" type="RayCast2D" parent="." unique_id=419513073]

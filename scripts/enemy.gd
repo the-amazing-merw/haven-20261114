@@ -148,8 +148,11 @@ func _damage_player(_other_body) -> void:
 	player.velocity += linear_velocity * enemy_knockback_mult
 	player.move_and_slide()
 
-func _damage_self(_other_body) -> void:
-	enemy_health -= 1
+func _damage_self(other_body: CollisionObject2D) -> void:
+	if other_body.is_class("Weapon2D"):
+		var weapon: Weapon2D = other_body
+		enemy_health -= weapon.damage(self)
+		print("Damage! Now at ", enemy_health, " hp after taking ", weapon.damage(self), " damage from ", weapon.name)
 
 func _on_player_death() -> void:
 	var tween = create_tween()
