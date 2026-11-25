@@ -7,8 +7,17 @@ class_name Sawblade2D extends Weapon2D
 
 var bounces: int = 0
 
-func damage(_target: Enemy2D) -> int:
+func enemy_damage(_target: Enemy2D) -> int:
 	return 1 + (bounces if player.upgrade_sawblade_bouncy_damage else 0)
+
+func player_damage(_target: Player2D) -> int:
+	return 0
+
+func destroy_condition() -> bool:
+	return bounces > player.upgrade_sawblade_bounces
+
+func destroy() -> void:
+	queue_free()
 
 func _ready() -> void:
 	player = get_tree().current_scene.get_node(^"Player")
@@ -24,5 +33,5 @@ func _on_body_entered(body: Node):
 		if b.collision_layer == 1:
 			bounces += 1
 			
-			if bounces > player.upgrade_sawblade_bounces:
-				queue_free()
+			if destroy_condition():
+				destroy()

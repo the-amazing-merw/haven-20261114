@@ -1,12 +1,14 @@
+@icon("res://editor/CharacterBody3D.svg")
+class_name Enemy2D extends RigidBody2D
+
 ## A navigating [RigidBody2D] with a radial [TextureProgressBar] for health.
 ##
 ## A navigating [RigidBody2D] with a radial [TextureProgressBar] for health.
 ## The enemy is editable, and has path-finding.
 
-@icon("res://editor/CharacterBody3D.svg")
-class_name Enemy2D extends RigidBody2D
 
 
+#region signals
 
 ## Emits when [member enemy_health] is changed, alongside the new health.
 signal health_changed(new_health: float)
@@ -26,56 +28,18 @@ signal wander_target_changed(new_target: Vector2)
 ## Emits when the player is spotted. 
 signal player_spotted
 
-
-
-## The player to target.
-@export var player: Player2D
-
-
+#endregion
 
 @export var info: EnemyInfo
-
-# @export_group("Enemy", "enemy")
-
-# ## The speed of the enemy in [i]milliunits[/i].
-# @export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var enemy_speed: float = 100.0: set = _set_speed
-
-# ## The maximum health the enemy may have in [i]hp[/i].
-# @export_range(1, 6, 1, "or_greater", "suffix:hp") var enemy_max_health: int = 6: set = _set_max_health
 
 ## The current health of the enemy in [i]hp[/i].
 @export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_health: int = 6: set = _set_health
 
-# ## The damage dealt by the enemy when it comes in contact with the player.
-# @export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_damage: int = 1
-
-# ## The knockback multiplier used to prevent issues between the enemy and player.
-# @export_range(1.0, 5.0, 1.0, "or_greater", "suffix:x") var enemy_knockback_mult: float = 10.0
-
-# ## The maximum distance the enemy can see the player from.
-# @export_range(64.0, 1024.0, 32.0, "hide_control", "or_greater", "suffix:px") var enemy_detection_radius: float = 512.0
-
-
-
-# @export_group("Wandering", "wandering")
-
-# ## The chance that this enemy will wander.
-# @export_range(0.0, 100.0, 1.0, "prefer_slider", "suffix:%") var wandering_chance: float = 10.0
-
-# ## The maximum radius this enemy may wander.
-# @export_range(25.6, 256.0, 25.6, "hide_control", "or_greater", "suffix:px") var wandering_radius: float = 256.0
-
-# ## The maximum time this enemy can wander.
-# @export_range(0.0, 10.0, 1.0, "hide_control", "or_greater", "suffix:s") var wandering_timeout: float = 3.0
-
-
-
-@onready var wandering_timeout: float = 3.0
-
-
+#region properties
 
 func _set_speed(new_speed):
 	enemy_speed = new_speed
+	navigation_agent.max_speed = new_speed
 	speed_changed.emit(new_speed)
 
 func _set_max_health(new_max):
@@ -91,25 +55,71 @@ func _set_health(new_value):
 	if new_value <= 0:
 		died.emit()
 
+func _set_wander_target(new_target):
+	wander_target = new_target
+	wander_target_changed.emit(new_target)
 
+#endregion
+
+#region variables
+
+var enemy_speed := 100.0
+var enemy_max_health := 6
+var enemy_knockback_mult := 10.0
+var enemy_detection_radius := 512.0
+
+var enemy_radial_enabled := true
+var enemy_radial_radius := 30.0
+var enemy_radial_min_damage := 1
+var enemy_radial_max_damage := 1
+var enemy_radial_damage_scaling := "Linear"
+
+var wander_enabled := true
+var wander_chance := 10.0
+var wander_radius := 256.0
+var wander_timeout := 3.0
 
 @onready var navigation_agent := $Agent
 @onready var ray := $Ray
 @onready var hurt_area := $HurtArea
 @onready var self_harm_area := $SelfHarmArea
 
-var is_wandering: bool
-var wander_target: Vector2
-var wander_time: float
+var player: Player2D
+
+var is_wandering: bool = false
+var wander_target: Vector2: set = _set_wander_target
+var wander_time: float = 0.0
+var found_player: bool = false
+
+#endregion
 
 
+
+func _setup_info() -> void:
+	enemy_speed = info.speed
+	enemy_max_health = info.max_health
+	enemy_knockback_mult = info.knockback_mult
+	enemy_detection_radius = info.detection_radius
+	
+	enemy_radial_enabled = info.damage_radial_enabled
+	enemy_radial_radius = info.damage_radial_radius
+	enemy_radial_min_damage = info.damage_radial_min_damage
+	enemy_radial_max_damage = info.damage_radial_max_damage
+	enemy_radial_damage_scaling = info.damage_radial_scaling
+	
+	wander_enabled = info.wander_enabled
+	wander_chance = info.wander_chance
+	wander_radius = info.wander_radius
+	wander_timeout = info.wander_timeout
 
 func _ready() -> void:
-# Currently on Mobile, so I can't press TAB!
-# TODO: Press TAB
-# var wandering_timeout: float = info.wander_timeout
-	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-	speed_changed.connect(func (new_speed): navigation_agent.max_speed = new_speed)
+	if info:
+		_setup_info()
+		info.changed.connect(_setup_info)
+	
+	player = get_tree().current_scene.get_node(^"Player")
+	
+	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	hurt_area.body_entered.connect(_damage_player)
 	self_harm_area.body_entered.connect(_damage_self)
 	player.died.connect(_on_player_death)
@@ -121,20 +131,29 @@ func _process(delta: float) -> void:
 	else:
 		wander_time = 0.0
 	
-	if (wander_target - position).length() < 10 or wander_time > wandering_timeout:
+	if (wander_target - position).length() < 10 or wander_time > wander_timeout:
 		is_wandering = false
 	
 	ray.target_position = player.position - position
 	if ray.is_colliding() or (ray.target_position).length() > enemy_detection_radius:
-		if randf() <= wandering_chance / 100 and !is_wandering:
-			wander_target = position + Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * wandering_radius
+		if randf() <= wander_chance / 100 and !is_wandering:
+			wander_target = position + Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * wander_radius
 			is_wandering = true
 			set_movement_target(wander_target)
+		
+		found_player = false
 	else:
+		if not found_player:
+			found_player = true
+			player_spotted.emit()
+		
 		is_wandering = true
 		wander_time = 0.0
 		wander_target = player.position
 		set_movement_target(wander_target)
+
+func get_alpha(x: float, a: float, b: float) -> float:
+	return (x - a) / (b - a)
 
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.set_target_position(movement_target)
@@ -155,7 +174,18 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	linear_velocity = safe_velocity
 
 func _damage_player(_other_body) -> void:
-	player.health -= enemy_damage
+	var damage: float = 0.0
+	
+	var alpha: float = clampf(get_alpha((player.position - position).length(), enemy_radial_radius, 30.0), 0.0, 1.0)
+	
+	if enemy_radial_damage_scaling == "Linear":
+		damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha)
+	elif enemy_radial_damage_scaling == "Exponential":
+		damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha ** 3.0)
+	elif enemy_radial_damage_scaling == "Logarithmic":
+		damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha ** 0.33)
+	
+	player.health -= roundi(damage)
 	player.velocity += linear_velocity * enemy_knockback_mult
 	player.move_and_slide()
 

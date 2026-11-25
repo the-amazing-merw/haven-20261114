@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dg562npb5srh5"]
 
 [ext_resource type="Script" uid="uid://bddoavtlg8mv0" path="res://scripts/enemy.gd" id="1_yfjof"]
+[ext_resource type="Resource" uid="uid://b0ovr7d2ix0og" path="res://data/standard_enemy.tres" id="2_a7d0n"]
 [ext_resource type="Texture2D" uid="uid://25rsnplvtra4" path="res://images/player.svg" id="2_cypye"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h2tm8"]
@@ -13,15 +14,7 @@ radius = 25.6
 mass = 0.25
 gravity_scale = 0.0
 script = ExtResource("1_yfjof")
-enemy_speed = null
-enemy_max_health = null
-enemy_health = null
-enemy_damage = null
-enemy_knockback_mult = null
-enemy_detection_radius = null
-wandering_chance = null
-wandering_radius = null
-wandering_timeout = null
+info = ExtResource("2_a7d0n")
 metadata/_custom_type_script = "uid://bddoavtlg8mv0"
 
 [node name="Ray" type="RayCast2D" parent="." unique_id=419513073]

@@ -4,4 +4,5 @@
 
 [resource]
 script = ExtResource("1_0b251")
+wander_enabled = true
 metadata/_custom_type_script = "uid://ba5qepe1f85fs"

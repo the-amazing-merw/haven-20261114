@@ -13,5 +13,5 @@ class_name Weapon2D extends RigidBody2D
 ## The function to determine whether to destroy the weapon.
 @abstract func destroy_condition() -> bool
 
-## Forces the weapon to be destroyed, after running custom clean-up code.
-@abstract func force_destroy()
+## Tell the weapon to be destroyed, after running custom clean-up code.
+@abstract func destroy() -> void
