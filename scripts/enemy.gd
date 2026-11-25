@@ -1,7 +1,6 @@
-## A controlled [CharacterBody2D] with a radial [TextureProgressBar] for health.
+## A navigating [RigidBody2D] with a radial [TextureProgressBar] for health.
 ##
-## A controlled [CharacterBody2D] with a radial [TextureProgressBar] for health.
-## Speed is measured in [i]milliunits[/i] and a default health and max health of [code]6 hp[/code].
+## A navigating [RigidBody2D] with a radial [TextureProgressBar] for health.
 ## The enemy is editable, and has path-finding.
 
 @icon("res://editor/CharacterBody3D.svg")
@@ -9,17 +8,23 @@ class_name Enemy2D extends RigidBody2D
 
 
 
-## Emits when [member enemy_health] is changed. Sends the new health as [param new_health].
+## Emits when [member enemy_health] is changed, alongside the new health.
 signal health_changed(new_health: float)
 
-## Emits when [member enemy_max_health] is changed. Sends the new health as [param new_max].
+## Emits when [member enemy_max_health] is changed, alongside the new maximum.
 signal max_health_changed(new_max: float)
 
-## Emits when [member enemy_speed] is changed. Sends the new speed as [param new_speed].
+## Emits when [member enemy_speed] is changed, alongside the new speed.
 signal speed_changed(new_speed: float)
 
 ## Emits when [member enemy_health] is zero or below.
 signal died
+
+## Emits when [member wander_target] has changed, alongside the new target.
+signal wander_target_changed(new_target: Vector2)
+
+## Emits when the player is spotted. 
+signal player_spotted
 
 
 
@@ -28,38 +33,44 @@ signal died
 
 
 
-@export_group("Enemy", "enemy")
+@export var info: EnemyInfo
 
-## The speed of the player in [i]milliunits[/i].
-@export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var enemy_speed: float = 100.0: set = _set_speed
+# @export_group("Enemy", "enemy")
 
-## The maximum health the player may have in [i]hp[/i].
-@export_range(1, 6, 1, "or_greater", "suffix:hp") var enemy_max_health: int = 6: set = _set_max_health
+# ## The speed of the enemy in [i]milliunits[/i].
+# @export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var enemy_speed: float = 100.0: set = _set_speed
 
-## The current health the player in [i]hp[/i].
+# ## The maximum health the enemy may have in [i]hp[/i].
+# @export_range(1, 6, 1, "or_greater", "suffix:hp") var enemy_max_health: int = 6: set = _set_max_health
+
+## The current health of the enemy in [i]hp[/i].
 @export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_health: int = 6: set = _set_health
 
-## The damage dealt by the enemy when it comes in contact with the player.
-@export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_damage: int = 1
+# ## The damage dealt by the enemy when it comes in contact with the player.
+# @export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_damage: int = 1
 
-## The knockback multiplier used to prevent issues between the enemy and player.
-@export_range(1.0, 5.0, 1.0, "or_greater", "suffix:x") var enemy_knockback_mult: float = 10.0
+# ## The knockback multiplier used to prevent issues between the enemy and player.
+# @export_range(1.0, 5.0, 1.0, "or_greater", "suffix:x") var enemy_knockback_mult: float = 10.0
 
-## The maximum distance the enemy can see the player from.
-@export_range(25.6, 256.0, 25.6, "hide_control", "or_greater", "suffix:px") var enemy_detection_radius: float = 256.0
+# ## The maximum distance the enemy can see the player from.
+# @export_range(64.0, 1024.0, 32.0, "hide_control", "or_greater", "suffix:px") var enemy_detection_radius: float = 512.0
 
 
 
-@export_group("Wandering", "wandering")
+# @export_group("Wandering", "wandering")
 
-## The chance that this enemy will wander.
-@export_range(0.0, 100.0, 1.0, "prefer_slider", "suffix:%") var wandering_chance: float = 10.0
+# ## The chance that this enemy will wander.
+# @export_range(0.0, 100.0, 1.0, "prefer_slider", "suffix:%") var wandering_chance: float = 10.0
 
-## The maximum radius this enemy may wander.
-@export_range(25.6, 256.0, 25.6, "hide_control", "or_greater", "suffix:px") var wandering_radius: float = 256.0
+# ## The maximum radius this enemy may wander.
+# @export_range(25.6, 256.0, 25.6, "hide_control", "or_greater", "suffix:px") var wandering_radius: float = 256.0
 
-## The maximum time this enemy can wander.
-@export_range(0.0, 10.0, 1.0, "hide_control", "or_greater", "suffix:s") var wandering_timeout: float = 3.0
+# ## The maximum time this enemy can wander.
+# @export_range(0.0, 10.0, 1.0, "hide_control", "or_greater", "suffix:s") var wandering_timeout: float = 3.0
+
+
+
+@onready var wandering_timeout: float = 3.0
 
 
 
@@ -94,6 +105,9 @@ var wander_time: float
 
 
 func _ready() -> void:
+# Currently on Mobile, so I can't press TAB!
+# TODO: Press TAB
+# var wandering_timeout: float = info.wander_timeout
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 	speed_changed.connect(func (new_speed): navigation_agent.max_speed = new_speed)
 	hurt_area.body_entered.connect(_damage_player)
