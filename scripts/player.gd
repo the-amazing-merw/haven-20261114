@@ -1,12 +1,12 @@
+@icon("res://editor/CharacterBody2D.svg")
+class_name Player2D extends CharacterBody2D
+
 ## A controllable [CharacterBody2D] with a radial [TextureProgressBar] for health.
 ##
 ## A controllable [CharacterBody2D] with a radial [TextureProgressBar] for health.
 ## Speed is measured in [i]milliunits[/i] and a default health and max health of [code]6 hp[/code].
 
-@icon("res://editor/CharacterBody2D.svg")
-class_name Player2D extends CharacterBody2D
-
-
+#region Signals
 
 ## Emits when [member health] is changed. Sends the new health as [param new_health].
 signal health_changed(new_health: float)
@@ -19,6 +19,11 @@ signal speed_changed(new_speed: float)
 
 ## Emits when [member health] is zero or below.
 signal died
+
+## Emit this when adding XP.
+signal add_xp(xp: int)
+
+#endregion
 
 
 
@@ -42,9 +47,13 @@ signal died
 @export var weapons_folder: Node
 
 ## The location of the [Sawblade2D] weapon to instantiate.
-@export_file("*.tscn") var weapons_sawblade: String
+@export_file("*.tscn") var weapons_sawblade: String = "res://prefabs/weapons/sawblade.tscn"
 
-@export_group("Upgrades", "upgrade")
+@export_group("Upgrades", "upgrades")
+
+## The number of available upgrades.
+@export_range(0, 1000, 1, "hide_control", "or_greater") var upgrades_available: int = 0
+
 @export_subgroup("Sawblade", "upgrade_sawblade")
 
 ## The number of bounces that sawblades last for.
@@ -57,8 +66,21 @@ signal died
 @export_range(350.0, 1500.0, 25.0, "prefer_slider", "or_greater", "or_less", "suffix:mu") var upgrade_sawblade_speed: float = 350.0
 
 
+@export_subgroup("Experience", "xp")
+
+## The total earned XP.
+@export_range(0, 1, 1, "hide_control", "or_greater", "suffix:xp") var xp_total: int = 0
+
+## The XP earned for this level.
+@export_range(0, 1, 1, "hide_control", "or_greater", "suffix:xp") var xp_for_this_level: int = 0: set = _set_level_xp
+
+## The current level
+@export_range(1, 1000, 1, "hide_control", "or_greater") var xp_level: int = 1
+
+
 
 @onready var sawblade := load(weapons_sawblade)
+
 
 func _set_speed(new_speed):
 	speed = new_speed
@@ -79,10 +101,19 @@ func _set_health(new_value):
 		died.emit()
 		if death_ui: death_ui.visible = true
 
+func _set_level_xp(xp):
+	xp_for_this_level = xp
+	
+	while xp_for_this_level >= get_level_cap(xp_level):
+		xp_for_this_level -= get_level_cap(xp_level)
+		xp_level += 1
+		upgrades_available += 1
+
 
 
 func _ready() -> void:
 	died.connect(_on_death)
+	add_xp.connect(_add_xp)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("weapon_sawblade"):
@@ -117,3 +148,11 @@ func _on_death() -> void:
 	var tween = create_tween()
 	tween.bind_node(self)
 	tween.tween_property(self, "speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
+
+func _add_xp(xp: int) -> void:
+	xp_total += xp
+	xp_for_this_level += xp
+
+## Get the amount of XP necessary to progress to the next level.
+func get_level_cap(l: int) -> int:
+	return roundi(10 + 2 * (l ** 2))

@@ -5,6 +5,12 @@
 [ext_resource type="Script" uid="uid://pj6n86kieqw8" path="res://scripts/connect_values.gd" id="3_woilj"]
 [ext_resource type="Script" uid="uid://c5j3vdx6dnav3" path="res://scripts/slider_value_connection.gd" id="4_182kp"]
 
+[sub_resource type="SystemFont" id="SystemFont_88xa8"]
+font_names = PackedStringArray("Cascadia Code", "Andale Mono", "PT Mono", "Monospace")
+
+[sub_resource type="LabelSettings" id="LabelSettings_freo2"]
+font = SubResource("SystemFont_88xa8")
+
 [node name="DebugInterface" type="Control" unique_id=1460206871]
 layout_mode = 3
 anchors_preset = 15
@@ -43,7 +49,6 @@ tab_0/title = "Player"
 tab_1/title = "Enemies"
 tab_1/disabled = true
 tab_2/title = "Upgrades"
-tab_2/disabled = true
 
 [node name="PlayerInfo" type="Control" parent="Resize/DebugPanel/Margin/Tabs" unique_id=1870466798]
 layout_mode = 2
@@ -158,6 +163,19 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = "Upgrades"
+
+[node name="Notice" type="Label" parent="Resize/DebugPanel/Margin/Tabs/UpgradeInfo" unique_id=2133952891]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 10
+text = "placeholder, but it's being worked on. might actually replace this with a console though."
+label_settings = SubResource("LabelSettings_freo2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Nothing" type="Control" parent="Resize" unique_id=1721963007]
 layout_mode = 2

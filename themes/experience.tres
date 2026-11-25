@@ -1,0 +1,11 @@
+[gd_resource type="Theme" format=3 uid="uid://bc3mwmlnvu76s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y8r14"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_57etd"]
+bg_color = Color(0, 1, 0, 1)
+
+[resource]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_y8r14")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_57etd")

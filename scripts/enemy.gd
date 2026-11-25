@@ -64,7 +64,8 @@ func _set_wander_target(new_target):
 var enemy_speed := 100.0
 var enemy_max_health := 6
 var enemy_knockback_mult := 10.0
-var enemy_detection_radius := 512.0
+var enemy_detection_radius := 2048.0
+var enemy_xp_value := 1
 
 var enemy_radial_enabled := true
 var enemy_radial_radius := 30.0
@@ -155,6 +156,7 @@ func _setup_info() -> void:
 	enemy_max_health = info.max_health
 	enemy_knockback_mult = info.knockback_mult
 	enemy_detection_radius = info.detection_radius
+	enemy_xp_value = info.experience_value
 	
 	enemy_radial_enabled = info.damage_radial_enabled
 	enemy_radial_radius = info.damage_radial_radius
@@ -213,6 +215,7 @@ func _on_player_death() -> void:
 	tween.tween_property(self, "enemy_speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
 
 func _on_self_death() -> void:
+	player.add_xp.emit(enemy_xp_value)
 	queue_free()
 
 #endregion

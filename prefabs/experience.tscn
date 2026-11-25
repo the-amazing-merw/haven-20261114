@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dx34f3c6gk5at"]
+
+[ext_resource type="Theme" uid="uid://bc3mwmlnvu76s" path="res://themes/experience.tres" id="1_l8ka4"]
+[ext_resource type="Script" uid="uid://x4ftxlgrg0k1" path="res://scripts/experience.gd" id="2_v6krp"]
+
+[node name="Experience" type="Control" unique_id=708174378]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_l8ka4")
+script = ExtResource("2_v6krp")
+
+[node name="ExperienceBar" type="ProgressBar" parent="." unique_id=1265353794]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+step = 1.0
+value = 50.0
+show_percentage = false

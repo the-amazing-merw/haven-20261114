@@ -35,6 +35,7 @@ visible = false
 
 [node name="StartRoom" parent="Level" unique_id=1176710171 instance=ExtResource("5_fyay7")]
 
-[node name="Player" parent="." unique_id=1027212936 node_paths=PackedStringArray("death_ui") instance=ExtResource("6_c80ml")]
+[node name="Player" parent="." unique_id=1027212936 node_paths=PackedStringArray("death_ui", "weapons_folder") instance=ExtResource("6_c80ml")]
 z_index = 1
 death_ui = NodePath("../Interface/Death")
+weapons_folder = NodePath("../Weapons")

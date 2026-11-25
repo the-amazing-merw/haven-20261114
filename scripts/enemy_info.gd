@@ -24,7 +24,10 @@ class_name EnemyInfo extends Resource
 
 ## The radius wherein the enemy may notice you, in pixels.
 ## Set to `0` to remove the limit.
-@export_range(0.0, 2048.0, 1.0, "hide_control", "or_greater", "suffix:px") var detection_radius: float = 512.0
+@export_range(0.0, 2048.0, 1.0, "hide_control", "or_greater", "suffix:px") var detection_radius: float = 2048.0
+
+## The XP awarded to the player when this enemy dies.
+@export_range(0, 1000, 1, "hide_control", "or_greater", "suffix:xp") var experience_value: int = 1
 
 
 @export_group("Radial Damage", "damage_radial")
