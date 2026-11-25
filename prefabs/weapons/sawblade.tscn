@@ -23,9 +23,3 @@ texture = ExtResource("1_0sye7")
 
 [node name="WeaponCollider" type="CollisionShape2D" parent="." unique_id=1714535188]
 shape = SubResource("CircleShape2D_fsdpt")
-
-[node name="HurtArea" type="StaticBody2D" parent="." unique_id=497450235]
-collision_layer = 8
-
-[node name="Shape" type="CollisionShape2D" parent="HurtArea" unique_id=465813112]
-shape = SubResource("CircleShape2D_fsdpt")

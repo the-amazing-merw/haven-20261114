@@ -3,7 +3,7 @@ class_name Sawblade2D extends Weapon2D
 
 
 
-@onready var player: Player2D
+var player: Player2D
 
 var bounces: int = 0
 

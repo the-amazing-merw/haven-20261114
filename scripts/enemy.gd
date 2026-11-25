@@ -6,9 +6,7 @@ class_name Enemy2D extends RigidBody2D
 ## A navigating [RigidBody2D] with a radial [TextureProgressBar] for health.
 ## The enemy is editable, and has path-finding.
 
-
-
-#region signals
+#region Signals
 
 ## Emits when [member enemy_health] is changed, alongside the new health.
 signal health_changed(new_health: float)
@@ -30,12 +28,7 @@ signal player_spotted
 
 #endregion
 
-@export var info: EnemyInfo
-
-## The current health of the enemy in [i]hp[/i].
-@export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_health: int = 6: set = _set_health
-
-#region properties
+#region Properties
 
 func _set_speed(new_speed):
 	enemy_speed = new_speed
@@ -61,7 +54,12 @@ func _set_wander_target(new_target):
 
 #endregion
 
-#region variables
+#region Variables
+
+@export var info: EnemyInfo
+
+## The current health of the enemy in [i]hp[/i].
+@export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_health: int = 6: set = _set_health
 
 var enemy_speed := 100.0
 var enemy_max_health := 6
@@ -93,24 +91,7 @@ var found_player: bool = false
 
 #endregion
 
-
-
-func _setup_info() -> void:
-	enemy_speed = info.speed
-	enemy_max_health = info.max_health
-	enemy_knockback_mult = info.knockback_mult
-	enemy_detection_radius = info.detection_radius
-	
-	enemy_radial_enabled = info.damage_radial_enabled
-	enemy_radial_radius = info.damage_radial_radius
-	enemy_radial_min_damage = info.damage_radial_min_damage
-	enemy_radial_max_damage = info.damage_radial_max_damage
-	enemy_radial_damage_scaling = info.damage_radial_scaling
-	
-	wander_enabled = info.wander_enabled
-	wander_chance = info.wander_chance
-	wander_radius = info.wander_radius
-	wander_timeout = info.wander_timeout
+#region Privates
 
 func _ready() -> void:
 	if info:
@@ -150,13 +131,8 @@ func _process(delta: float) -> void:
 		is_wandering = true
 		wander_time = 0.0
 		wander_target = player.position
+		
 		set_movement_target(wander_target)
-
-func get_alpha(x: float, a: float, b: float) -> float:
-	return (x - a) / (b - a)
-
-func set_movement_target(movement_target: Vector2):
-	navigation_agent.set_target_position(movement_target)
 
 func _physics_process(_delta: float):
 	# Do not query when the map has never synchronized and is empty.
@@ -165,6 +141,7 @@ func _physics_process(_delta: float):
 	
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	var new_velocity: Vector2 = global_position.direction_to(next_path_position) * enemy_speed
+	
 	if navigation_agent.avoidance_enabled:
 		navigation_agent.set_velocity(new_velocity)
 	else:
@@ -172,6 +149,39 @@ func _physics_process(_delta: float):
 
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	linear_velocity = safe_velocity
+
+func _setup_info() -> void:
+	enemy_speed = info.speed
+	enemy_max_health = info.max_health
+	enemy_knockback_mult = info.knockback_mult
+	enemy_detection_radius = info.detection_radius
+	
+	enemy_radial_enabled = info.damage_radial_enabled
+	enemy_radial_radius = info.damage_radial_radius
+	enemy_radial_min_damage = info.damage_radial_min_damage
+	enemy_radial_max_damage = info.damage_radial_max_damage
+	enemy_radial_damage_scaling = info.damage_radial_scaling
+	
+	wander_enabled = info.wander_enabled
+	wander_chance = info.wander_chance
+	wander_radius = info.wander_radius
+	wander_timeout = info.wander_timeout
+
+#endregion
+
+#region Helpers
+
+## Gets the alpha from a linearly interpolated number.
+func get_alpha(x: float, a: float, b: float) -> float:
+	return (x - a) / (b - a)
+
+## Sets the destination for path-finding.
+func set_movement_target(movement_target: Vector2):
+	navigation_agent.set_target_position(movement_target)
+
+#endregion
+
+#region Extras
 
 func _damage_player(_other_body) -> void:
 	var damage: float = 0.0
@@ -189,16 +199,20 @@ func _damage_player(_other_body) -> void:
 	player.velocity += linear_velocity * enemy_knockback_mult
 	player.move_and_slide()
 
-func _damage_self(other_body: CollisionObject2D) -> void:
-	if other_body.is_class("Weapon2D"):
+func _damage_self(other_body: PhysicsBody2D) -> void:
+	if other_body is Weapon2D:
 		var weapon: Weapon2D = other_body
-		enemy_health -= weapon.damage(self)
-		print("Damage! Now at ", enemy_health, " hp after taking ", weapon.damage(self), " damage from ", weapon.name)
+		var damage = weapon.enemy_damage(self)
+		
+		enemy_health -= damage
 
 func _on_player_death() -> void:
 	var tween = create_tween()
+	
 	tween.bind_node(self)
 	tween.tween_property(self, "enemy_speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
 
 func _on_self_death() -> void:
 	queue_free()
+
+#endregion
