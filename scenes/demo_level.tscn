@@ -73,9 +73,13 @@ polygon = PackedVector2Array(-256, -3072, -256, -2304, 256, -2304, 256, -2560, 2
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(256, -256, 2048, -256, 2048, -768, 2560, -768, 2560, -256, 7424, -256, 7424, -1024, 4352, -1024, 4352, -1536, 7424, -1536, 7424, -2560, 3584, -2560, 3584, -3072, 8448, -3072, 8448, -2560, 7936, -2560, 7936, -256, 9728, -256, 9728, 512, 9216, 512, 9216, 256, 4864, 256, 4864, 1024, 4352, 1024, 4352, 256, 256, 256, 256, 2304, 4352, 2304, 4352, 1536, 4864, 1536, 4864, 2304, 5888, 2304, 5888, 2816, 3072, 2816, 3072, 5376, 7168, 5376, 7168, 2816, 6400, 2816, 6400, 2304, 9216, 2304, 9216, 2048, 9728, 2048, 9728, 2816, 7680, 2816, 7680, 3584, 7424, 3584, 7424, 4608, 7680, 4608, 7680, 6656, 11776, 6656, 11776, 5888, 12288, 5888, 12288, 6656, 14848, 6656, 14848, 4608, 15360, 4608, 15360, 7168, 7168, 7168, 7168, 5888, 1024, 5888, 1024, 5376, 2560, 5376, 2560, 2816, 256, 2816, 256, 3840, -256, 3840, -256, -1792, 256, -1792)
 
-[node name="Player" parent="." unique_id=838036766 node_paths=PackedStringArray("death_ui") instance=ExtResource("1_etyyu")]
+[node name="Player" parent="." unique_id=838036766 node_paths=PackedStringArray("death_ui", "weapons_folder") instance=ExtResource("1_etyyu")]
 position = Vector2(550, 320)
 death_ui = NodePath("../Interface/Death")
+weapons_folder = NodePath("../Weapons")
+weapons_sawblade = "uid://j0jetxofe5a8"
+upgrade_sawblade_bounces = 20
+upgrade_sawblade_bouncy_damage = true
 
 [node name="MainCamera" type="Camera2D" parent="." unique_id=1865513572 node_paths=PackedStringArray("subject")]
 position_smoothing_enabled = true
@@ -100,623 +104,1973 @@ visible = false
 [node name="Enemy" parent="Enemies" unique_id=1391182168 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1898, 238)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy2" parent="Enemies" unique_id=1432049881 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1421, 139)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy23" parent="Enemies" unique_id=834512977 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1652, 163)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy24" parent="Enemies" unique_id=1229106467 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1745, 291)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy25" parent="Enemies" unique_id=1203449088 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1872, 370)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy26" parent="Enemies" unique_id=998672432 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1634, 464)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy27" parent="Enemies" unique_id=1638545847 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1449, 495)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy28" parent="Enemies" unique_id=1024681920 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1986, 486)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy29" parent="Enemies" unique_id=2105706536 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2178, 354)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy30" parent="Enemies" unique_id=1816850500 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2090, 226)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy31" parent="Enemies" unique_id=857686880 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2037, 366)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy32" parent="Enemies" unique_id=490848838 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2296, 184)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy33" parent="Enemies" unique_id=2120373178 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2588, 488)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy34" parent="Enemies" unique_id=1686252671 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2681, 589)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy35" parent="Enemies" unique_id=392830815 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2845, 534)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy36" parent="Enemies" unique_id=1500963267 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2816, 691)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy37" parent="Enemies" unique_id=1477149907 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2548, 717)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy38" parent="Enemies" unique_id=450862436 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2701, 800)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy39" parent="Enemies" unique_id=1046946474 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2520, 839)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy40" parent="Enemies" unique_id=56465208 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2365, 832)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy41" parent="Enemies" unique_id=1829132449 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2236, 804)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy42" parent="Enemies" unique_id=761196888 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2083, 844)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy43" parent="Enemies" unique_id=979039477 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1996, 809)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy44" parent="Enemies" unique_id=1202902456 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2105, 1164)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy45" parent="Enemies" unique_id=61758924 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2328, 1306)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy46" parent="Enemies" unique_id=1912093589 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2172, 1426)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy47" parent="Enemies" unique_id=779157319 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2187, 1286)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy48" parent="Enemies" unique_id=1557383099 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2438, 1229)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy49" parent="Enemies" unique_id=1409323341 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2703, 1202)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy50" parent="Enemies" unique_id=1991933542 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2546, 1378)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy51" parent="Enemies" unique_id=1336666995 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2598, 1299)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy52" parent="Enemies" unique_id=1539420961 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2845, 1299)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy53" parent="Enemies" unique_id=142807695 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2747, 1387)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy54" parent="Enemies" unique_id=2069544933 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2790, 1491)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy55" parent="Enemies" unique_id=134250581 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2595, 1509)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy56" parent="Enemies" unique_id=1439602577 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2391, 1509)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy57" parent="Enemies" unique_id=1709461048 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2395, 1420)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy58" parent="Enemies" unique_id=1362569119 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2051, 1537)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy59" parent="Enemies" unique_id=2000231467 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2044, 1365)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy60" parent="Enemies" unique_id=1774897679 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1706, 787)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy61" parent="Enemies" unique_id=1153875233 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1489, 799)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy62" parent="Enemies" unique_id=1860666455 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1261, 877)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy63" parent="Enemies" unique_id=1105673301 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1077, 818)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy64" parent="Enemies" unique_id=1966165564 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(878, 855)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy65" parent="Enemies" unique_id=47210920 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(941, 1071)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy66" parent="Enemies" unique_id=312580802 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1045, 1236)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy67" parent="Enemies" unique_id=132375828 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1072, 1085)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy68" parent="Enemies" unique_id=85948594 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1194, 973)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy69" parent="Enemies" unique_id=1937728208 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1300, 1110)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy70" parent="Enemies" unique_id=790859377 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1252, 1269)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy71" parent="Enemies" unique_id=14342891 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1480, 1174)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy72" parent="Enemies" unique_id=1114170680 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1432, 1048)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy73" parent="Enemies" unique_id=766609030 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1593, 889)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy74" parent="Enemies" unique_id=1234958555 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1694, 984)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy75" parent="Enemies" unique_id=947151232 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1657, 1071)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy76" parent="Enemies" unique_id=704216272 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1692, 1239)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy77" parent="Enemies" unique_id=493494605 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(554, 1228)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy78" parent="Enemies" unique_id=1730353659 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(344, 1229)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy79" parent="Enemies" unique_id=1787687551 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(211, 1050)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy80" parent="Enemies" unique_id=378526392 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(349, 793)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy81" parent="Enemies" unique_id=273379909 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(561, 944)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy82" parent="Enemies" unique_id=1117131665 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1396, -146)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy83" parent="Enemies" unique_id=389115328 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1680, -145)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy84" parent="Enemies" unique_id=404600594 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1501, -511)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy85" parent="Enemies" unique_id=384851056 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1289, -496)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy86" parent="Enemies" unique_id=1776455595 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1736, -503)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy87" parent="Enemies" unique_id=210117399 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2438, -470)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy88" parent="Enemies" unique_id=866041193 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2764, -434)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy89" parent="Enemies" unique_id=1379026600 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2354, -338)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy90" parent="Enemies" unique_id=1546475364 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2161, -427)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy91" parent="Enemies" unique_id=1689382580 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2172, -229)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy92" parent="Enemies" unique_id=1278169699 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2417, -186)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy93" parent="Enemies" unique_id=953632782 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2747, -338)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy94" parent="Enemies" unique_id=1942872500 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2958, -338)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy95" parent="Enemies" unique_id=465692732 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3036, -502)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy96" parent="Enemies" unique_id=1128103632 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3228, -286)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy97" parent="Enemies" unique_id=179625044 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3108, -192)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy98" parent="Enemies" unique_id=17170370 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2909, -145)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy99" parent="Enemies" unique_id=981033806 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2681, -119)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy100" parent="Enemies" unique_id=1730496713 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2614, 31)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy101" parent="Enemies" unique_id=62917401 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2547, 210)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy102" parent="Enemies" unique_id=2128271722 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2819, 189)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy103" parent="Enemies" unique_id=1578875154 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2816, 39)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy104" parent="Enemies" unique_id=1447234230 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3010, 23)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy105" parent="Enemies" unique_id=760777716 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3059, 133)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy106" parent="Enemies" unique_id=1161406057 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3273, 132)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy107" parent="Enemies" unique_id=1829523361 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3207, -13)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy108" parent="Enemies" unique_id=1921820846 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3617, -480)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy109" parent="Enemies" unique_id=1706998756 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3617, -384)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy110" parent="Enemies" unique_id=697569355 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3608, -303)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy111" parent="Enemies" unique_id=2059818448 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3609, -210)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy112" parent="Enemies" unique_id=506059628 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3610, -121)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy113" parent="Enemies" unique_id=885464821 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3610, -22)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy114" parent="Enemies" unique_id=1960877047 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3605, 63)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy115" parent="Enemies" unique_id=1751481452 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3598, 164)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy116" parent="Enemies" unique_id=391523394 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3665, 120)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy118" parent="Enemies" unique_id=577252922 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3174, 484)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy119" parent="Enemies" unique_id=10876838 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3317, 484)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy120" parent="Enemies" unique_id=298496035 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3479, 502)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy121" parent="Enemies" unique_id=1411909977 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3616, 481)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy122" parent="Enemies" unique_id=1408442383 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3603, 673)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy123" parent="Enemies" unique_id=359633927 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3408, 614)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy124" parent="Enemies" unique_id=954346540 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3203, 717)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy125" parent="Enemies" unique_id=1396746746 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3279, 607)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy126" parent="Enemies" unique_id=1952444762 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3343, 774)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy127" parent="Enemies" unique_id=2042725972 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3536, 768)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy128" parent="Enemies" unique_id=24011561 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3696, 802)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy129" parent="Enemies" unique_id=1849779860 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3664, 1139)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy130" parent="Enemies" unique_id=1251829785 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3470, 1140.9999)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy131" parent="Enemies" unique_id=319528631 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3288.0002, 1134.9999)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy132" parent="Enemies" unique_id=497378108 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3287, 1305.9999)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy133" parent="Enemies" unique_id=1951266872 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3479, 1378)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy134" parent="Enemies" unique_id=1988614613 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3638.9998, 1330)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy135" parent="Enemies" unique_id=6089366 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3600, 1506)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy136" parent="Enemies" unique_id=289867906 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3398.9998, 1518)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy137" parent="Enemies" unique_id=1431658156 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3232, 1513)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy138" parent="Enemies" unique_id=1620787058 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3167, 1382)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy139" parent="Enemies" unique_id=1662617514 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3421, 1274)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy140" parent="Enemies" unique_id=150940847 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1555, 1628.0001)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy141" parent="Enemies" unique_id=1090309995 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1210.9999, 1619)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy142" parent="Enemies" unique_id=1417778882 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(801.0001, 1617.9999)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy143" parent="Enemies" unique_id=137337958 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(464, 1618.0001)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy144" parent="Enemies" unique_id=305987607 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(199, 1594)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy145" parent="Enemies" unique_id=1014302741 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(349, 1693.9999)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy146" parent="Enemies" unique_id=277730616 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(559, 1696)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy147" parent="Enemies" unique_id=1736086554 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(904, 1697)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy148" parent="Enemies" unique_id=2078240243 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1061, 1695)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy149" parent="Enemies" unique_id=789946984 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1304, 1698.9999)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy150" parent="Enemies" unique_id=79545181 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1425, 1627)
 rotation = -0.16669291
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy117" parent="Enemies" unique_id=1616630960 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(3658, -570)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy3" parent="Enemies" unique_id=492693979 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(2612, -193)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy4" parent="Enemies" unique_id=434105139 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1156, -160)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy5" parent="Enemies" unique_id=1284959934 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(294, -530)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy6" parent="Enemies" unique_id=104303856 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(337, -470)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy7" parent="Enemies" unique_id=2056674927 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(249, -367)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy8" parent="Enemies" unique_id=490253773 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(352, -318)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy9" parent="Enemies" unique_id=2136558978 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(339, -202)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy10" parent="Enemies" unique_id=1391197977 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(207, -203)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy11" parent="Enemies" unique_id=1498227035 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(158, -312)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy12" parent="Enemies" unique_id=1161173574 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(175, -460)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy13" parent="Enemies" unique_id=1137343702 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(957, -242)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy14" parent="Enemies" unique_id=1739489605 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1077, -425)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy15" parent="Enemies" unique_id=1568057336 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(970, -453)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy16" parent="Enemies" unique_id=1297501138 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(841, -530)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy17" parent="Enemies" unique_id=1931917768 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(823, -412)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy18" parent="Enemies" unique_id=1258421876 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(784, -319)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy19" parent="Enemies" unique_id=116826569 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(821, -215)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy20" parent="Enemies" unique_id=788345737 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1379, 310)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy21" parent="Enemies" unique_id=1538629363 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1536, 267)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Enemy22" parent="Enemies" unique_id=1801520363 node_paths=PackedStringArray("player") instance=ExtResource("6_fmty4")]
 position = Vector2(1591, 330)
 player = NodePath("../../Player")
+enemy_speed = 100.0
+enemy_max_health = 6
+enemy_health = 6
+enemy_damage = 1
+enemy_knockback_mult = 10.0
+enemy_detection_radius = 256.0
+wandering_chance = 10.0
+wandering_radius = 256.0
+wandering_timeout = 3.0
 
 [node name="Weapons" type="Node" parent="." unique_id=1012329715]

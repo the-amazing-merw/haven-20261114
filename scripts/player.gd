@@ -36,6 +36,14 @@ signal died
 
 
 
+@export_group("Weapons", "weapons")
+
+## The [Node] to store each weapon instance within.
+@export var weapons_folder: Node
+
+## The location of the [Sawblade2D] weapon to instantiate.
+@export_file("*.tscn") var weapons_sawblade: String
+
 @export_group("Upgrades", "upgrade")
 @export_subgroup("Sawblade", "upgrade_sawblade")
 
@@ -45,7 +53,12 @@ signal died
 ## Whether each bounce adds extra damage to sawblades.
 @export var upgrade_sawblade_bouncy_damage: bool = false
 
+## The speed of sawblades in [i]milliunits[/i].
+@export_range(350.0, 1500.0, 25.0, "prefer_slider", "or_greater", "or_less", "suffix:mu") var upgrade_sawblade_speed: float = 350.0
 
+
+
+@onready var sawblade := load(weapons_sawblade)
 
 func _set_speed(new_speed):
 	speed = new_speed
@@ -70,6 +83,22 @@ func _set_health(new_value):
 
 func _ready() -> void:
 	died.connect(_on_death)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("weapon_sawblade"):
+		var weapon: RigidBody2D = sawblade.instantiate()
+		weapons_folder.add_child(weapon)
+		weapon.position = position
+		
+		var targetVelocity: Vector2 = (get_global_mouse_position() - position).normalized() * upgrade_sawblade_speed
+		
+		if (targetVelocity + velocity).length() > targetVelocity.length():
+			targetVelocity += velocity
+		
+		weapon.linear_velocity = targetVelocity
+
+func _process(_delta: float) -> void:
+	$Aim.look_at(get_global_mouse_position())
 
 func _physics_process(_delta: float) -> void:
 	# Input

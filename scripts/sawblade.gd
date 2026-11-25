@@ -1,3 +1,4 @@
+@icon("res://editor/Sawblade2D.svg")
 class_name Sawblade2D extends Weapon2D
 
 
@@ -13,6 +14,9 @@ func _ready() -> void:
 	player = get_tree().current_scene.get_node(^"Player")
 	body_entered.connect(_on_body_entered)
 
+func _process(delta: float) -> void:
+	$Sawblade.rotation_degrees += 3600.0 * delta
+
 func _on_body_entered(body: Node):
 	if body.is_class("CollisionObject2D"):
 		var b: CollisionObject2D = body
@@ -22,6 +26,3 @@ func _on_body_entered(body: Node):
 			
 			if bounces > player.upgrade_sawblade_bounces:
 				queue_free()
-
-func _integrate_forces(_state: PhysicsDirectBodyState2D) -> void:
-	angular_velocity = 50.0

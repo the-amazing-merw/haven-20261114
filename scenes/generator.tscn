@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://bo4e7u8a8k5nx"]
+
+[ext_resource type="Script" uid="uid://c7xr7e866gg4t" path="res://scripts/camera_track.gd" id="1_kgmdj"]
+[ext_resource type="Script" uid="uid://d2ao3sr7luepp" path="res://scripts/show_on_load.gd" id="2_ionxw"]
+[ext_resource type="PackedScene" uid="uid://8by06s3t8ews" path="res://prefabs/debug_interface.tscn" id="3_ychy0"]
+[ext_resource type="PackedScene" uid="uid://dy85h18x3cqpj" path="res://prefabs/death.tscn" id="4_g6cet"]
+[ext_resource type="PackedScene" uid="uid://dp53bcuve2uvf" path="res://scenes/procedural_modules/start_room.tscn" id="5_fyay7"]
+[ext_resource type="PackedScene" uid="uid://d2uxfhv85l7hi" path="res://prefabs/player.tscn" id="6_c80ml"]
+
+[node name="Generator" type="Node2D" unique_id=1485635116]
+
+[node name="MainCamera" type="Camera2D" parent="." unique_id=147587103 node_paths=PackedStringArray("subject")]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.5
+script = ExtResource("1_kgmdj")
+subject = NodePath("../Player")
+
+[node name="Interface" type="CanvasLayer" parent="." unique_id=683992237]
+visible = false
+script = ExtResource("2_ionxw")
+
+[node name="DebugInterface" parent="Interface" unique_id=1460206871 node_paths=PackedStringArray("player") instance=ExtResource("3_ychy0")]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+player = NodePath("../../Player")
+
+[node name="Death" parent="Interface" unique_id=1213513323 instance=ExtResource("4_g6cet")]
+visible = false
+
+[node name="Enemies" type="Node" parent="." unique_id=693771558]
+
+[node name="Weapons" type="Node" parent="." unique_id=1936310752]
+
+[node name="Level" type="Node" parent="." unique_id=1362675744]
+
+[node name="StartRoom" parent="Level" unique_id=1176710171 instance=ExtResource("5_fyay7")]
+
+[node name="Player" parent="." unique_id=1027212936 node_paths=PackedStringArray("death_ui") instance=ExtResource("6_c80ml")]
+z_index = 1
+death_ui = NodePath("../Interface/Death")

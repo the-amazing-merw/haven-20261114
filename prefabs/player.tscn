@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://d2uxfhv85l7hi"]
 
 [ext_resource type="Script" uid="uid://xqdaikyytfus" path="res://scripts/player.gd" id="1_4dohe"]
-[ext_resource type="Script" uid="uid://c6gwonmwm6r3l" path="res://scripts/aim.gd" id="2_1txc5"]
 [ext_resource type="Texture2D" uid="uid://25rsnplvtra4" path="res://images/player.svg" id="2_r66lb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsdpt"]
@@ -16,7 +15,6 @@ script = ExtResource("1_4dohe")
 [node name="Aim" type="Polygon2D" parent="." unique_id=2011239244]
 color = Color(0.14509805, 0.9019608, 0.2509804, 1)
 polygon = PackedVector2Array(32, -7.9999943, 31.999998, 8.000006, 40, 6.9938224e-06)
-script = ExtResource("2_1txc5")
 
 [node name="PlayerCollider" type="CollisionShape2D" parent="." unique_id=785498532]
 shape = SubResource("CircleShape2D_fsdpt")

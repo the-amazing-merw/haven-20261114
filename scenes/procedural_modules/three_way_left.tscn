@@ -1,0 +1,67 @@
+[gd_scene format=4 uid="uid://ddlv28ywxohvm"]
+
+[ext_resource type="TileSet" uid="uid://cbfa7idtprgmp" path="res://tilemaps/dungeon.tres" id="1_vn264"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_kk8mv"]
+vertices = PackedVector2Array(1408, 384, 2176, 384, 2176, 2176, 1408, 2176, 1408, 2432, 1152, 2432, 1152, 2176, 384, 1408, 384, 1152, 1152, 384, 384, 2176, 128, 1408, 128, 1152, 384, 384, 1408, 128, 1152, 128)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 3, 6, 7, 8, 9), PackedInt32Array(6, 10, 7), PackedInt32Array(7, 11, 12, 8), PackedInt32Array(8, 13, 9), PackedInt32Array(14, 0, 9, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 2560, 0, 2560, 2560, 0, 2560)])
+agent_radius = 128.0
+baking_rect = Rect2(0, 0, 2560, 2560)
+
+[node name="ThreeWayLeft" type="Node" unique_id=824167022]
+
+[node name="Rotation" type="Node2D" parent="." unique_id=1041877224]
+
+[node name="Tiles" type="TileMapLayer" parent="Rotation" unique_id=494806987]
+position = Vector2(640, -320)
+rotation = 1.5707964
+scale = Vector2(0.25, 0.25)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAEAAAAAAABAAAAAAAFAAAAAAABAAAAAAAGAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAkAAAAAAAAAAAAIAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAFAAkAAAABAAAAAAAEAAkAAAABAAAAAAADAAkAAAAAAAAAAAACAAkAAAAAAAAAAAABAAkAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAUAAAABAAAAAAAAAAQAAAABAAAAAAAAAAMAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAABAAQAAAABAAAAAAABAAUAAAABAAAAAAABAAYAAAABAAAAAAABAAcAAAABAAAAAAABAAgAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAAAAAACAAMAAAABAAAAAAACAAQAAAABAAAAAAACAAUAAAABAAAAAAACAAYAAAABAAAAAAACAAcAAAABAAAAAAACAAgAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAADAAQAAAABAAAAAAADAAUAAAABAAAAAAADAAYAAAABAAAAAAADAAcAAAABAAAAAAADAAgAAAABAAAAAAAEAAEAAAABAAAAAAAEAAIAAAABAAAAAAAEAAMAAAABAAAAAAAEAAQAAAABAAAAAAAEAAUAAAABAAAAAAAEAAYAAAABAAAAAAAEAAcAAAABAAAAAAAEAAgAAAABAAAAAAAFAAEAAAABAAAAAAAFAAIAAAABAAAAAAAFAAMAAAABAAAAAAAFAAQAAAABAAAAAAAFAAUAAAABAAAAAAAFAAYAAAABAAAAAAAFAAcAAAABAAAAAAAFAAgAAAABAAAAAAAGAAEAAAABAAAAAAAGAAIAAAABAAAAAAAGAAMAAAABAAAAAAAGAAQAAAABAAAAAAAGAAUAAAABAAAAAAAGAAYAAAABAAAAAAAGAAcAAAABAAAAAAAGAAgAAAABAAAAAAAHAAEAAAABAAAAAAAHAAIAAAABAAAAAAAHAAMAAAABAAAAAAAHAAQAAAABAAAAAAAHAAUAAAABAAAAAAAHAAYAAAABAAAAAAAHAAcAAAABAAAAAAAHAAgAAAABAAAAAAAIAAEAAAABAAAAAAAIAAIAAAABAAAAAAAIAAMAAAABAAAAAAAIAAQAAAABAAAAAAAIAAUAAAABAAAAAAAIAAYAAAABAAAAAAAIAAcAAAABAAAAAAAIAAgAAAABAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAAAAAAAAAAJAAcAAAAAAAAAAAAJAAgAAAAAAAAAAAA=")
+tile_set = ExtResource("1_vn264")
+
+[node name="Body" type="StaticBody2D" parent="Rotation/Tiles" unique_id=44361444]
+
+[node name="LevelShape" type="CollisionPolygon2D" parent="Rotation/Tiles/Body" unique_id=777389629]
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 256, 256, 256, 256, 1024, 0, 1024)
+
+[node name="LevelShape2" type="CollisionPolygon2D" parent="Rotation/Tiles/Body" unique_id=1503566902]
+position = Vector2(0, 1536)
+polygon = PackedVector2Array(0, 1024, 0, 0, 256, 0, 256, 768, 1024, 768, 1024, 1024)
+
+[node name="LevelShape3" type="CollisionPolygon2D" parent="Rotation/Tiles/Body" unique_id=887274738]
+position = Vector2(0, 1536)
+polygon = PackedVector2Array(1536, 768, 2304, 768, 2304, -1280, 1536, -1280, 1536, -1536, 2560, -1536, 2560, 1024, 1536, 1024)
+
+[node name="Navigator" type="NavigationRegion2D" parent="Rotation/Tiles/Body" unique_id=1824187786]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_kk8mv")
+
+[node name="LevelShape" type="Polygon2D" parent="Rotation/Tiles/Body/Navigator" unique_id=2088118049]
+polygon = PackedVector2Array(0, 0, 1024, 0, 1024, 256, 256, 256, 256, 1024, 0, 1024)
+
+[node name="LevelShape2" type="Polygon2D" parent="Rotation/Tiles/Body/Navigator" unique_id=1676847849]
+position = Vector2(0, 1536)
+polygon = PackedVector2Array(0, 1024, 0, 0, 256, 0, 256, 768, 1024, 768, 1024, 1024)
+
+[node name="LevelShape3" type="Polygon2D" parent="Rotation/Tiles/Body/Navigator" unique_id=1552511694]
+position = Vector2(0, 1536)
+polygon = PackedVector2Array(1536, 768, 2304, 768, 2304, -1280, 1536, -1280, 1536, -1536, 2560, -1536, 2560, 1024, 1536, 1024)
+
+[node name="LevelOverlap" type="StaticBody2D" parent="Rotation" unique_id=572080630]
+position = Vector2(640, -320)
+rotation = 1.5707964
+collision_layer = 32
+
+[node name="Overlap" type="CollisionPolygon2D" parent="Rotation/LevelOverlap" unique_id=168164905]
+polygon = PackedVector2Array(8, 8, 632, 8, 632, 632, 8, 632)
+
+[node name="Exits" type="Node" parent="Rotation" unique_id=1150405151]
+
+[node name="LevelExit" type="Node2D" parent="Rotation/Exits" unique_id=896165748]
+position = Vector2(320, -320)
+rotation = 1.5707964
+
+[node name="LevelExit2" type="Node2D" parent="Rotation/Exits" unique_id=27409768]
+position = Vector2(640, 0)
+rotation = 1.5707964

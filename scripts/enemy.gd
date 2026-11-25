@@ -107,11 +107,11 @@ func _process(delta: float) -> void:
 	else:
 		wander_time = 0.0
 	
-	if magnitude(wander_target - position) < 10 or wander_time > wandering_timeout:
+	if (wander_target - position).length() < 10 or wander_time > wandering_timeout:
 		is_wandering = false
 	
 	ray.target_position = player.position - position
-	if ray.is_colliding() or magnitude(ray.target_position) > enemy_detection_radius:
+	if ray.is_colliding() or (ray.target_position).length() > enemy_detection_radius:
 		if randf() <= wandering_chance / 100 and !is_wandering:
 			wander_target = position + Vector2(randf_range(-1.0, 1.0), randf_range(-1.0, 1.0)).normalized() * wandering_radius
 			is_wandering = true
@@ -124,9 +124,6 @@ func _process(delta: float) -> void:
 
 func set_movement_target(movement_target: Vector2):
 	navigation_agent.set_target_position(movement_target)
-
-func magnitude(vector: Vector2) -> float:
-	return sqrt(vector.x ** 2 + vector.y ** 2)
 
 func _physics_process(_delta: float):
 	# Do not query when the map has never synchronized and is empty.
