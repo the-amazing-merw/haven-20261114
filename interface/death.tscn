@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dy85h18x3cqpj"]
 
 [ext_resource type="AudioStream" uid="uid://cr5468eo7q717" path="res://sounds/death.mp3" id="1_70ets"]
-[ext_resource type="Script" uid="uid://qqwh4qbb6jux" path="res://prefabs/death.gd" id="1_mx2f8"]
+[ext_resource type="Script" uid="uid://qqwh4qbb6jux" path="res://scripts/interface/death.gd" id="1_mx2f8"]
 
 [sub_resource type="Gradient" id="Gradient_mx2f8"]
 interpolation_mode = 2

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dg562npb5srh5"]
 
-[ext_resource type="Script" uid="uid://bddoavtlg8mv0" path="res://scripts/enemy.gd" id="1_yfjof"]
+[ext_resource type="Script" uid="uid://bddoavtlg8mv0" path="res://scripts/classes/enemy.gd" id="1_yfjof"]
 [ext_resource type="Resource" uid="uid://b0ovr7d2ix0og" path="res://data/standard_enemy.tres" id="2_a7d0n"]
 [ext_resource type="Texture2D" uid="uid://25rsnplvtra4" path="res://images/player.svg" id="2_cypye"]
 
@@ -21,7 +21,7 @@ metadata/_custom_type_script = "uid://bddoavtlg8mv0"
 target_position = Vector2(0, 36)
 
 [node name="HurtArea" type="Area2D" parent="." unique_id=2043040152]
-collision_layer = 16
+collision_layer = 0
 collision_mask = 4
 priority = 1
 
@@ -29,7 +29,7 @@ priority = 1
 shape = SubResource("CircleShape2D_h2tm8")
 
 [node name="SelfHarmArea" type="Area2D" parent="." unique_id=2072867301]
-collision_layer = 16
+collision_layer = 0
 collision_mask = 8
 priority = 1
 

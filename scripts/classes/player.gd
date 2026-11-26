@@ -25,62 +25,39 @@ signal add_xp(xp: int)
 
 #endregion
 
+#region Variables
 
+@export var death_ui: Control ## The UI to show when the player dies.
 
-## The UI to show when the player dies.
-@export var death_ui: Control
-
-## The speed of the player in [i]milliunits[/i].
-@export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var speed: float = 100.0: set = _set_speed
-
-## The maximum health the player may have in [i]hp[/i].
-@export_range(1, 6, 1, "or_greater", "suffix:hp") var max_health: int = 6: set = _set_max_health
-
-## The current health the player in [i]hp[/i].
-@export_range(0, 6, 1, "or_greater", "suffix:hp") var health: int = 6: set = _set_health
-
-
+@export_range(-250, 250, 25, "or_greater", "or_less", "prefer_slider", "suffix:mu") var speed: float = 100.0: set = _set_speed ## The speed of the player in [i]milliunits[/i].
+@export_range(1, 6, 1, "or_greater", "suffix:hp") var max_health: int = 6: set = _set_max_health ## The maximum health the player may have.
+@export_range(0, 6, 1, "or_greater", "suffix:hp") var health: int = 6: set = _set_health ## The current health the player.
 
 @export_group("Weapons", "weapons")
-
-## The [Node] to store each weapon instance within.
-@export var weapons_folder: Node
-
-## The location of the [Sawblade2D] weapon to instantiate.
-@export_file("*.tscn") var weapons_sawblade: String = "res://prefabs/weapons/sawblade.tscn"
+@export var weapons_folder: Node ## The [Node] to store each weapon instance within.
+@export_file("*.tscn") var weapons_sawblade: String = "res://prefabs/weapons/sawblade.tscn" ## The location of the [Sawblade2D] weapon to instantiate.
 
 @export_group("Upgrades", "upgrades")
-
-## The number of available upgrades.
-@export_range(0, 1000, 1, "hide_control", "or_greater") var upgrades_available: int = 0
+@export_range(0, 1000, 1, "hide_control", "or_greater") var upgrades_available: int = 0 ## The number of available upgrades.
 
 @export_subgroup("Sawblade", "upgrade_sawblade")
-
-## The number of bounces that sawblades last for.
-@export_range(1, 10, 1, "or_greater", "prefer_slider") var upgrade_sawblade_bounces: int = 1
-
-## Whether each bounce adds extra damage to sawblades.
-@export var upgrade_sawblade_bouncy_damage: bool = false
-
-## The speed of sawblades in [i]milliunits[/i].
-@export_range(350.0, 1500.0, 25.0, "prefer_slider", "or_greater", "or_less", "suffix:mu") var upgrade_sawblade_speed: float = 350.0
-
+@export_range(1, 10, 1, "or_greater", "prefer_slider") var upgrade_sawblade_bounces: int = 1 ## The number of bounces that sawblades last for.
+@export var upgrade_sawblade_bouncy_damage: bool = false ## Whether each bounce adds extra damage to sawblades.
+@export_range(350.0, 1500.0, 25.0, "prefer_slider", "or_greater", "or_less", "suffix:mu") var upgrade_sawblade_speed: float = 350.0 ## The speed of sawblades in [i]milliunits[/i].
 
 @export_subgroup("Experience", "xp")
+@export_range(0, 1, 1, "hide_control", "or_greater", "suffix:xp") var xp_total: int = 0 ## The total earned XP.
+@export_range(0, 1, 1, "hide_control", "or_greater", "suffix:xp") var xp_for_this_level: int = 0: set = _set_level_xp ## The XP earned for this level.
+@export_range(1, 1000, 1, "hide_control", "or_greater") var xp_level: int = 1 ## The current level
 
-## The total earned XP.
-@export_range(0, 1, 1, "hide_control", "or_greater", "suffix:xp") var xp_total: int = 0
-
-## The XP earned for this level.
-@export_range(0, 1, 1, "hide_control", "or_greater", "suffix:xp") var xp_for_this_level: int = 0: set = _set_level_xp
-
-## The current level
-@export_range(1, 1000, 1, "hide_control", "or_greater") var xp_level: int = 1
-
-
+var is_dead: bool = false
 
 @onready var sawblade := load(weapons_sawblade)
+@onready var self_harm_area: Area2D = $SelfHarmArea
 
+#endregion
+
+#region Properties
 
 func _set_speed(new_speed):
 	speed = new_speed
@@ -109,42 +86,53 @@ func _set_level_xp(xp):
 		xp_level += 1
 		upgrades_available += 1
 
+#endregion
 
+#region Privates
 
 func _ready() -> void:
 	died.connect(_on_death)
 	add_xp.connect(_add_xp)
+	self_harm_area.body_entered.connect(_harm_condition)
+
+func _process(_delta: float) -> void:
+	$Aim.look_at(get_global_mouse_position())
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("weapon_sawblade"):
+	if event.is_action_pressed("weapon_sawblade"): # Throw a sawblade.
 		var weapon: RigidBody2D = sawblade.instantiate()
 		weapons_folder.add_child(weapon)
 		weapon.position = position
 		
+		# Set the velocity toward the target direction at the speed set by the upgrade.
 		var targetVelocity: Vector2 = (get_global_mouse_position() - position).normalized() * upgrade_sawblade_speed
 		
+		# If you are moving towards the direction, give it a boost!
 		if (targetVelocity + velocity).length() > targetVelocity.length():
 			targetVelocity += velocity
 		
 		weapon.linear_velocity = targetVelocity
-
-func _process(_delta: float) -> void:
-	$Aim.look_at(get_global_mouse_position())
 
 func _physics_process(_delta: float) -> void:
 	# Input
 	var inputVector := Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
 	var localVelocity := inputVector.normalized() * speed
 	
-	# Math
+	# Acceleration
 	velocity += localVelocity * 0.8
 	velocity *= 0.8
 	
 	move_and_slide()
 
 func _on_death() -> void:
-	print("We died.")
+	if is_dead: return
 	
+	is_dead = true
+	
+	print("[PLAYER] Death reported. Experience: ", xp_total, " xp")
+	
+	# Slow the player.
+	# TODO: Improve this, with a global slowdown on the world; this would slow weapons and other moving bodies too!
 	var tween = create_tween()
 	tween.bind_node(self)
 	tween.tween_property(self, "speed", 0.0, 2.0).set_trans(Tween.TRANS_SINE)
@@ -153,6 +141,21 @@ func _add_xp(xp: int) -> void:
 	xp_total += xp
 	xp_for_this_level += xp
 
+func _harm_condition(other: PhysicsBody2D):
+	if other is Weapon2D:
+		var weapon: Weapon2D = other
+		
+		health -= weapon.player_damage(self)
+	else:
+		push_warning("An object that is not a Weapon2D is on the Weapons physics-layer! Troublemaker: ", other.name)
+		return
+
+#endregion
+
+#region Utilities
+
 ## Get the amount of XP necessary to progress to the next level.
 func get_level_cap(l: int) -> int:
 	return roundi(10 + 2 * (l ** 2))
+
+#endregion

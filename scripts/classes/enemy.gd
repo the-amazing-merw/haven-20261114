@@ -28,6 +28,44 @@ signal player_spotted
 
 #endregion
 
+#region Variables
+
+@export var info: EnemyInfo
+
+## The current health of the enemy in [i]hp[/i].
+@export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_health: int = 6: set = _set_health
+
+var enemy_speed := 100.0
+var enemy_max_health := 6
+var enemy_knockback_mult := 10.0
+var enemy_detection_radius := 2048.0
+var enemy_xp_value := 1
+
+var enemy_radial_enabled := true
+var enemy_radial_radius := 30.0
+var enemy_radial_min_damage := 1
+var enemy_radial_max_damage := 1
+var enemy_radial_damage_scaling := 1.0
+
+var wander_enabled := true
+var wander_chance := 10.0
+var wander_radius := 256.0
+var wander_timeout := 3.0
+
+@onready var navigation_agent := $Agent
+@onready var ray := $Ray
+@onready var hurt_area := $HurtArea
+@onready var self_harm_area := $SelfHarmArea
+
+var player: Player2D
+
+var is_wandering: bool = false
+var wander_target: Vector2: set = _set_wander_target
+var wander_time: float = 0.0
+var found_player: bool = false
+
+#endregion
+
 #region Properties
 
 func _set_speed(new_speed):
@@ -54,44 +92,6 @@ func _set_wander_target(new_target):
 
 #endregion
 
-#region Variables
-
-@export var info: EnemyInfo
-
-## The current health of the enemy in [i]hp[/i].
-@export_range(0, 6, 1, "or_greater", "suffix:hp") var enemy_health: int = 6: set = _set_health
-
-var enemy_speed := 100.0
-var enemy_max_health := 6
-var enemy_knockback_mult := 10.0
-var enemy_detection_radius := 2048.0
-var enemy_xp_value := 1
-
-var enemy_radial_enabled := true
-var enemy_radial_radius := 30.0
-var enemy_radial_min_damage := 1
-var enemy_radial_max_damage := 1
-var enemy_radial_damage_scaling := "Linear"
-
-var wander_enabled := true
-var wander_chance := 10.0
-var wander_radius := 256.0
-var wander_timeout := 3.0
-
-@onready var navigation_agent := $Agent
-@onready var ray := $Ray
-@onready var hurt_area := $HurtArea
-@onready var self_harm_area := $SelfHarmArea
-
-var player: Player2D
-
-var is_wandering: bool = false
-var wander_target: Vector2: set = _set_wander_target
-var wander_time: float = 0.0
-var found_player: bool = false
-
-#endregion
-
 #region Privates
 
 func _ready() -> void:
@@ -100,6 +100,8 @@ func _ready() -> void:
 		info.changed.connect(_setup_info)
 	
 	player = get_tree().current_scene.get_node(^"Player")
+	
+	assert(player, "[ENEMY] Player cannot be found in %s/Player… Aborting!" % get_tree().current_scene.get_path())
 	
 	navigation_agent.velocity_computed.connect(_on_velocity_computed)
 	hurt_area.body_entered.connect(_damage_player)
@@ -169,33 +171,14 @@ func _setup_info() -> void:
 	wander_radius = info.wander_radius
 	wander_timeout = info.wander_timeout
 
-#endregion
-
-#region Helpers
-
-## Gets the alpha from a linearly interpolated number.
-func get_alpha(x: float, a: float, b: float) -> float:
-	return (x - a) / (b - a)
-
-## Sets the destination for path-finding.
-func set_movement_target(movement_target: Vector2):
-	navigation_agent.set_target_position(movement_target)
-
-#endregion
-
-#region Extras
-
 func _damage_player(_other_body) -> void:
+	if not enemy_radial_enabled: return
+	
 	var damage: float = 0.0
 	
 	var alpha: float = clampf(get_alpha((player.position - position).length(), enemy_radial_radius, 30.0), 0.0, 1.0)
 	
-	if enemy_radial_damage_scaling == "Linear":
-		damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha)
-	elif enemy_radial_damage_scaling == "Exponential":
-		damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha ** 3.0)
-	elif enemy_radial_damage_scaling == "Logarithmic":
-		damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha ** 0.33)
+	damage = lerpf(enemy_radial_min_damage, enemy_radial_max_damage, alpha ** enemy_radial_damage_scaling)
 	
 	player.health -= roundi(damage)
 	player.velocity += linear_velocity * enemy_knockback_mult
@@ -217,5 +200,17 @@ func _on_player_death() -> void:
 func _on_self_death() -> void:
 	player.add_xp.emit(enemy_xp_value)
 	queue_free()
+
+#endregion
+
+#region Utilities
+
+## Gets the alpha from a linearly interpolated number.
+func get_alpha(x: float, a: float, b: float) -> float:
+	return (x - a) / (b - a)
+
+## Sets the destination for path-finding.
+func set_movement_target(movement_target: Vector2):
+	navigation_agent.set_target_position(movement_target)
 
 #endregion

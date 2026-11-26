@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://j0jetxofe5a8"]
 
 [ext_resource type="Texture2D" uid="uid://cc1j7xr12dgjn" path="res://images/sawblade.png" id="1_0sye7"]
-[ext_resource type="Script" uid="uid://dy311iusbng1m" path="res://scripts/sawblade.gd" id="1_byu6j"]
+[ext_resource type="Script" uid="uid://dy311iusbng1m" path="res://scripts/classes/weapons/sawblade.gd" id="1_byu6j"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0sye7"]
 friction = 0.0

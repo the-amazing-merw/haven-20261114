@@ -1,12 +1,13 @@
 [gd_scene format=3 uid="uid://8by06s3t8ews"]
 
-[ext_resource type="Script" uid="uid://dtjgfffa16qxd" path="res://scripts/debug_interface.gd" id="1_kgw66"]
+[ext_resource type="Script" uid="uid://dtjgfffa16qxd" path="res://scripts/interface/debug_interface.gd" id="1_kgw66"]
 [ext_resource type="Theme" uid="uid://sgjkcfglxhyb" path="res://themes/debug.tres" id="1_mi3bn"]
-[ext_resource type="Script" uid="uid://pj6n86kieqw8" path="res://scripts/connect_values.gd" id="3_woilj"]
-[ext_resource type="Script" uid="uid://c5j3vdx6dnav3" path="res://scripts/slider_value_connection.gd" id="4_182kp"]
+[ext_resource type="Script" uid="uid://pj6n86kieqw8" path="res://scripts/interface/connect_values.gd" id="3_woilj"]
+[ext_resource type="Script" uid="uid://c5j3vdx6dnav3" path="res://scripts/interface/slider_value_connection.gd" id="4_182kp"]
 
 [sub_resource type="SystemFont" id="SystemFont_88xa8"]
 font_names = PackedStringArray("Cascadia Code", "Andale Mono", "PT Mono", "Monospace")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_freo2"]
 font = SubResource("SystemFont_88xa8")

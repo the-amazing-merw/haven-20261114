@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://d2uxfhv85l7hi"]
 
-[ext_resource type="Script" uid="uid://xqdaikyytfus" path="res://scripts/player.gd" id="1_4dohe"]
+[ext_resource type="Script" uid="uid://xqdaikyytfus" path="res://scripts/classes/player.gd" id="1_4dohe"]
 [ext_resource type="Texture2D" uid="uid://25rsnplvtra4" path="res://images/player.svg" id="2_r66lb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsdpt"]
 radius = 25.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4dohe"]
+radius = 30.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1027212936]
 collision_layer = 4
@@ -40,3 +43,11 @@ nine_patch_stretch = true
 texture_under = ExtResource("2_r66lb")
 texture_progress = ExtResource("2_r66lb")
 tint_under = Color(0.3167847, 0.31678474, 0.3167847, 1)
+
+[node name="SelfHarmArea" type="Area2D" parent="." unique_id=135747588]
+collision_layer = 0
+collision_mask = 8
+priority = 1
+
+[node name="Shape" type="CollisionShape2D" parent="SelfHarmArea" unique_id=1089612662]
+shape = SubResource("CircleShape2D_4dohe")

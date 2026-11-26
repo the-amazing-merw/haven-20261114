@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://c6xn6q13ax50v"]
+
+[ext_resource type="Texture2D" uid="uid://bmf05s11jm4r4" path="res://icon.svg" id="1_2h2y7"]
+
+[node name="UpgradeSelect" type="Control" unique_id=68300896]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=464864137]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1930388923]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1870394657]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/Button" unique_id=630547108]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/Button" unique_id=910110578]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/Button/VBoxContainer" unique_id=387948070]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_2h2y7")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/Button/VBoxContainer" unique_id=1118076880]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Upgrade 1"
+horizontal_alignment = 1
+vertical_alignment = 2

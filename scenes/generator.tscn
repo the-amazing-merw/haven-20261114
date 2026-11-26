@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bo4e7u8a8k5nx"]
 
 [ext_resource type="Script" uid="uid://c7xr7e866gg4t" path="res://scripts/camera_track.gd" id="1_kgmdj"]
-[ext_resource type="Script" uid="uid://d2ao3sr7luepp" path="res://scripts/show_on_load.gd" id="2_ionxw"]
-[ext_resource type="PackedScene" uid="uid://8by06s3t8ews" path="res://prefabs/debug_interface.tscn" id="3_ychy0"]
-[ext_resource type="PackedScene" uid="uid://dy85h18x3cqpj" path="res://prefabs/death.tscn" id="4_g6cet"]
+[ext_resource type="Script" uid="uid://d2ao3sr7luepp" path="res://scripts/interface/show_on_load.gd" id="2_ionxw"]
+[ext_resource type="PackedScene" uid="uid://8by06s3t8ews" path="res://interface/debug_interface.tscn" id="3_ychy0"]
+[ext_resource type="PackedScene" uid="uid://dy85h18x3cqpj" path="res://interface/death.tscn" id="4_g6cet"]
 [ext_resource type="PackedScene" uid="uid://dp53bcuve2uvf" path="res://scenes/procedural_modules/start_room.tscn" id="5_fyay7"]
 [ext_resource type="PackedScene" uid="uid://d2uxfhv85l7hi" path="res://prefabs/player.tscn" id="6_c80ml"]
 
